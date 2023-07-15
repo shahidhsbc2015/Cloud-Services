@@ -1,0 +1,86 @@
+1. Check packages install in Ec2
+	ssh into Ec2
+		sudo su
+		cd /var/www/html
+		ls 		(check apache,wordpress file istalled)
+		cat .htaccess
+		service httpd status 
+		service httpd start	(if not apache running)
+		service httpd status
+2. Browse to public IP of EC2
+		Wordpress installation/setup will show-up
+		database name : mydb
+		username: mydatabase
+		password: mydatabase
+		Database host - MySQL Endpoint created in step-1
+3. wp-config.php
+	copy code 
+	go to ec2 
+		vi wp-config.php
+		paste into file
+		save
+	Run the istallation
+4. Welcome
+	site title - parooj
+	Username-
+	password
+	email
+	
+5. Login
+6. Post>Add New
+	Heading - Hello Guys to Wordpress
+	info - Welcome to Wordpress Site. Let Create HA Env
+	Upload Images
+	Publish
+	View post
+7. Ec2
+	cd wp-content
+	ls
+	cd uploads
+	ls
+	cd 2021 (current year)
+	ls
+	cd 04	(current month)
+	ls		(uploaded files)
+8. Files are Uploaded to EC2. Stored somewher in EBS
+	When ever someone upload any file, we also need to stored is this file to S3 for redundancy. Also will use Cloudfront to delivery faster rather using ec2
+		cd /var/www/html
+		aws s3 ls	(should show all buckets)
+		aws s3 cp --recursive /var/www/html/wp-content/uploads s3://<media_bucketname>
+
+9. we need to add redundancy, if we loose Ec2 machine. full copy for my web
+		aws s3 cp --recursive /var/www/html s3://<code_bucketname>
+		aws s3 ls s3://<code_bucketname>
+
+10. Allows our website instead of serving the images out of Ec2 rather serve our images out of cloud front.
+		vi .htaccess
+		replace  http://d2jmrva8tfzxcq.cloudfront.net with our cloudfront http://<url>
+		save
+11. Sync with s3	-- only update change
+		aws s3 sync /var/www/html s3://<code_bucketname>
+	
+12. Update apache to allow url rewrite
+		cd /etc/httpd/conf
+		ls
+		cp httpd.conf httpd.conf_copy
+		vi httpd.conf
+		
+		scroll to Allow Override Control <Directory "/var/www/html">
+		
+		AllowOverride None > AllowOverride All
+		save
+13.	Restart apache 
+	service httpd restart
+	service httpd status
+	
+14. Update Images in media bucket from private to public using bucket policy. Check images in post. Its houd route through cloudfront
+15. Create application loadbalance
+	Name: MyALB
+	Security Group -"Website SG"
+	New Target Group:
+		myTG
+		Heath check:
+			path: /healthy.html
+	Register Target
+		register running ec2 
+16. Route elb to route53

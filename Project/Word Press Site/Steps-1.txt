@@ -1,0 +1,35 @@
+https://d0.awsstatic.com/whitepapers/wordpress-best-practices-on-aws.pdf
+https://aws.amazon.com/blogs/startups/how-to-accelerate-your-wordpress-site-with-amazon-cloudfront/
+https://aws.amazon.com/getting-started/hands-on/deploy-wordpress-with-amazon-rds/
+1. Create 2 S3 bucket
+	1 for code
+	1 for media
+2. Create Cloudfront for media bucket - leave everything default
+3. Create 2 Security Group
+	1. Website SG:
+		http 80 0.0.0.0/0;::/0
+		ssh 22 0.0.0.0/0;::/0
+	2. Database SG
+		MySQL/Aurora 3306 - local IP
+		MySQL/Aurora 3306 - Website SG
+		
+4. Create MySQL Database>switch to old console
+	Mysql 5.6.37 > free tier
+	Enter login details to MySQL:
+		Master username: mydatabase
+		Master password: mydatabase
+	DB instance class: Choose db.t2.mirco
+	Availability & durability - Create
+	Connectivity: 
+		Public access: No
+		VPC security group>Existing security group name: "Database SG"
+	Under Additional configuration:
+		Initial database name : mydb
+5. Create IAM - Ec2_s3_full accss
+	Choose the service - Ec2
+	Policy - S3 Full access
+6. Create Ec2 instance 
+	Ec2_s3_full IAM
+	USer input - BootstrapScript
+
+Wait for all thing to come up

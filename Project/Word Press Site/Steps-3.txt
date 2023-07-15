@@ -1,0 +1,61 @@
+ref - https://crontab.guru/
+1. Crontab - Download content from s3 every minute
+	cd /etc
+	vi crontab
+	*/1 * * * * root aws s3 sync --delete s3://YOUR_Code_S3_BUCKET_NAME /var/www/html
+	systemctl start crond.service
+(--delete (boolean) Files that exist in the destination but not in the source are deleted during sync.)	
+
+Upload file to code s3 bucket
+check file uploaded to ec2
+
+2. Create EC2 AMI (reader AMI)
+	MyWordPressReaderAMI
+
+3. Create AutoScale Group with new AMI
+	create Launch Config
+		AMI- MyWordPressReaderAMI
+		t2.mirco
+		IAM - Ec2_s3_full
+		user script- ReaderBootStrap.sh
+		security group - Website SG
+	2 mininum Ec2
+	default VPC with all subnet
+	Target Group - myTG
+	
+	
+	
+4.	Writer EC2
+	cd /etc
+	vi crontab
+	*/1 * * * * root aws s3 sync --delete /var/www/html s3://YOUR_Code_S3_BUCKET_NAME 
+	*/1 * * * * root aws s3 sync --delete /var/www/html/wp-content/uploads s3://YOUR_media_S3_BUCKET_NAME 
+	
+	cd /var/www/html
+	echo "This is Test file to check s3 upload"> code_test.txt
+	
+	cd /var/www/html/wp-content/uploads
+	echo "This is Test file to check s3 upload image"> code_test.txt
+	systemctl start crond.service
+
+5.	www.parooj.in	reader node
+	www.parooj.in/wp-admin	writer node
+
+6.	Publish new post with image
+
+Check fault tolerant
+1. terminate any one reader Ec2 - 
+	check website
+	New Ec2
+2. Reboot RDS
+	check website - will be connectivity issue
+	
+Clean Up
+==========
+1. Delete RDS
+2. Delete AutoScale
+3. Delete ELB
+4. Delete Target Group
+5. Delete Any EC2
+6. Delete CloudFront
+7. Delete AMI

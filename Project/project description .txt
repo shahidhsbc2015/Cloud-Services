@@ -1,0 +1,13 @@
+1. Running Application in EC2 with HA Architecture
+	We are Running Word press application on EC2. WordPress is a free and open-source content management system written in PHP and paired with a MySQL or MariaDB database. Features include a plugin architecture and a template system, referred to within WordPress as Themes
+	A highly available architecture involves multiple components working together to ensure uninterrupted service during a specific period. Highly available systems include the capability to recover from unexpected events in the shortest time possible. By moving the processes to backup components, these systems minimize downtime or eliminate it.
+	We eliminate single points of failure & automatic failover with failure Detection by using auto scaling group and application load balancer. We are doing data Backup on regular bases into S3 bucket. 
+	High performance application by separating reader and writer node
+2. 	Data processing
+	Data processing is, generally, "the collection and manipulation of items of data to produce meaningful information."
+	We can process data using any service provided by AWS like - EC2, EMR, Lambda, ECR, etc
+	We have opt AWS Lambda. AWS Lambda is an event-driven, serverless computing platform. It is a computing service that runs code in response to events and automatically manages the computing resources required by that code. 
+	We collect our raw data in S3 bucket. As soon as File is uploaded to S3, event is created and lambda will be triggered to process the file.
+	Post processing file, we write back the clean data/processed data to other bucket.
+	We needed to drop required columns in csv files, using lambda it is easy to just run code and resources are automatically manages by AWS.
+	
