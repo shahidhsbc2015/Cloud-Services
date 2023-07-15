@@ -1,0 +1,84 @@
+Sticky sessions
+Classic load balances routes each request independently to the registered EC2 instance
+with the smallest load
+Sticky sessions allows you to bind a user's session to a specific EC2 instance 
+This ensures that all requests from the user during the session are sent to the same instance.
+
+If your application is saving something locally on your EC2 instance or it's writing a file 
+You can enable sticky sessions for application load balances as well, but the traffic will be sent at the target group level
+
+Cross zone load balancing
+
+Path patterns
+you can create a listener with rules to forward request based on the URL path.
+This is known as path-base rooting.
+If you are running micros services, you can reroute traffic to multiple backend services 
+using path-based routing. For example, you could route a general request to one target group 
+and request to render images to another target group.
+
+
+Sticky sessions enables your users to stick to the same EC2 instance.
+Can be useful if you're storing information locally to that instance.
+
+Cross zone load balancing enables you to load balance across multiple Availability Zones 
+
+Path patterns allows you to direct traffic to different EC2 instances based on the URL contained in the request.
+
+
+Auto Scaling
+
+Groups
+Logical components. Web server group or your application group or your database group is just a logical component 
+where you're going to put your EC2 instances in.
+
+Configuration templates
+Group uses a launch template or a launch configuration as a configuration template for it's EC2 instances.
+it's the instructions which EC2 instances to launch, what size and storage
+You can specify information such as the AMI ID, instance type, key pair, security groups and
+the block device mappings for your instances.
+
+Scaling Options
+
+Scaling options provides several ways for you to scale your Auto scaling groups.
+For example, you can configure a group to scale based on the occurrence of a specified
+condition (dynamic scaling) or on a schedule.
+
+what are your scaling options.
+
+Maintain the current instance levels at all times.
+Scale manually 
+Scale based on a schedule
+Scale based on demand 
+Use predictive scaling 
+
+Maintain your current instance levels at all times.
+=====
+You can configure your auto scaling groups to maintain a specified number of running instances at all times.
+To maintain the current instance levels, Amazon EC2 auto scaling performs a periodic health check on running instances within an auto scaling group.
+When Amazon EC2 auto scaling finds an unhealthy instance, it terminate that instance and then launch a new one.
+
+Scale manually
+===
+Manual scaling is the most basic way to scale your resources, where you specify only the change in the maximum minimum or desired capacity of your auto scaling group.
+Amazon EC2 auto scaling manages the process of creating or terminating instances to maintain the updated capacity
+
+Scale based on a schedule
+======
+Scaling by schedule means that the scaling actions are performed automatically as a function of date.
+This is useful when you know exactly when to increase or decrease the number of instances in your
+group simply because the need arises on a predictable schedule.
+
+Scaling on demand
+=====
+A more advanced way to scale your resources - using scaling policies - let you define the parameters that control the scaling process.
+For example, let's say you have a web application that currently runs on two instances and you want
+the CPU utilization of the auto scaling group to stay at around 50 per cent when the load on the application changes.
+This method is useful for scaling in response to changing conditions, when you don't know when those
+conditions will change.
+You can set up Amazon EC2 auto scaling to respond for you. 
+
+Use predictive scaling.
+
+You can use Amazon EC2 auto scaling in combination with AWS auto scaling to scale resources across multiple services 
+AWS auto scaling can also help you maintain optimal availability and performance by combining predictive scaling and dynamic scaling.
+(proactive and reactive approaches) to scale your Amazon EC2 instances capacities faster.

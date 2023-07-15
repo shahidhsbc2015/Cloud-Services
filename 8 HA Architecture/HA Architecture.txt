@@ -1,0 +1,25 @@
+HA architecture.
+===============
+
+Everything fails. EVERYTHING
+You should always plan for failure.
+
+Simian Army
+Netflix actually sort of Simian Army Project
+
+Example :- highly available architecture.
+
+Scenario: You might have a website that requires a minimum of 6 instances and it must be highly available. You must also be able to tolerate the failure of 1 availability zone. What is the ideal architecture for this environment while being the most cost effective ?
+2 Availability Zones with 2 instances in each AZ
+3 Availability Zones with 3 instances in each AZ
+1 Availability Zones with 6 instances in each AZ
+3 Availability Zones with 2 instances in each AZ
+
+Always be designing for failure
+Use Multiple AZ's and Multiple regions wherever you can
+Know the difference between Multi AZ and Read Replicas for RDS
+Know the difference between scaling out and scaling up
+ Scaling out is we use auto scaling groups and we add additional EC2 instances
+ Scaling up is where we increase the resources inside our Ec2 instances i.e, go from a t2.micro to t6.xlarge
+Read the questions carefully and always consider the cost element
+Know the difference S3 storage classes
