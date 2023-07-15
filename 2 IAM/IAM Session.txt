@@ -1,0 +1,5 @@
+in IAM DashBoard change sign-In url
+create 2 user add them in group admin, give admin policy
+create group HR, move 1 user to this, give dynamodb read policy
+add individual policy to user
+create role/policy

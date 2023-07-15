@@ -1,0 +1,16 @@
+Assignment for this week, complete before next class
+
+1. Create Free AWS account
+2. Create new User as "parag" and share me user console credentials with modified aws login url
+3. give this new user permission/policy
+	a. IAM full access
+	b. s3 full access
+4. create IT, Infra and HR group
+	a. give HR group s3 read only permission/policy
+	b. give IT group s3 full access, dynamoDB full access and Ec2 full access
+	c. give infra group system Admin access
+5. Create 4 new user as "Amit", "yogesh", "bavika" and "ankita"
+	a. add amit and ankita in infra group
+	b. add amit, bavika in IT group
+	c. yogesh in HR
+
