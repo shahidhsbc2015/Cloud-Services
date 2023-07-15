@@ -1,0 +1,144 @@
+You use the internet you've used DNS DNS is used to convert human friendly domain names (such as http://google.com)
+into an Internet Protocol(IP) address(such as http://192.162.70.1)
+
+IP addresses are used by computers to identify each other on a network.
+IP addresses come in to different forms IPv4 and IPv6 
+
+
+IPv4 vs IPv6
+IPv4 is a 32 bit field which has over 4 billion different addresses (4,294,967,296)
+and essentially it has a finite number of addresses
+
+IPv6 was created to solve this depletion issue and has an address space of 128bits which in theory has
+340,282,366,920,938,463,463,374,607,431,768,211,456, or 340 undecillion address
+
+Top Level Domains
+if we look at common domain names such as irctc.co.in, google.com, BBC.co.uk etc, you'll notice
+a string of characters separated by a dots or periods. The last word in a domain name represents
+the "top level domain".
+The second word in a domain name is known as a second level domain name.
+And this is optional though and depends on the domain names.
+
+.com
+.edu
+.gov
+.co.in
+.gov.in
+.com.in
+
+these domain names are controlled by the Internet Assigned Numbers Authority (IANA) in 
+a root zone database which is essentially a database of all available top level domains.
+You can go and view this database just by visiting :
+http://www.iana.org/domains/root/db
+
+Domain Registars
+because all the names in a given domain have to be unique there needs to be a way of organizing this all so that all domain names aren't duplicated.
+This is where domain registrars come in. A registrar is an authority that can assign domain names
+directly under one or more top level domains. These domains are registered with InterNIC, which is
+a service of ICANN.
+ICAAN basically enforces the uniqueness of domain names across the Internet.
+Each domain name must be registered in a central database known as a who is database and popular
+domain registrars includes
+Amazon, GoDaddy.com, google.com
+
+Start of Authority (SOA) Record
+
+The SOA record stores information about the following:
+The name of the DNS server for that zone
+The administrator of the zone
+The current version of the data file
+The default TTL value (in seconds) for resource records in the zone
+
+Name Server (NS)
+Name Server (NS) records are used by Top level Domain servers to direct traffic to the Content DNS server that
+contains the authoritative DNS records.
+
+A Record
+
+
+An "A" record is the most fundamental type of DNS record.
+The "A" in a record stands for "Address"
+The A record is used by a computer to translate the name of the domain to an IP address.
+So for example www.abcd.gov might point to http://121.1.10.92
+That's all in a record is it's just like the phone example.
+
+TTL
+TTL is length that a DNS record is cached on either the resolving server or the users own local P.C. and
+it's equal to the value "Time To Live) in seconds
+The low the time to live the faster changes to DNS records take to propagate throughout the Internet.
+DNS change can take 48 hours to propagate throughout the entire internet
+
+Canonical Name (CNAME)
+Canonical Name (CNAME) record is a type of resource record in the DNS that defines an
+alias for the CNAME for your server (the domain name defined in an A or AAAA record). 
+It can be used to resolve one domain name to another.
+For example you might have a mobile Web site with the domain name http://m.irctc.co.in and that is
+used for when your users browse to a domain name on their mobile devices.
+You may also want the name http://mobile.irctc.co.in to resolve to the same address and instead of
+having two separate IP addresses you just map one to the other.
+
+The following Routing policies are available at 53.
+Simple Routing.
+Weighted Routing.
+Latency-base Routing.
+Fail over Routing
+Geo location Routing.
+Geo proximity Routing 
+Multi value Answer Routing
+
+
+
+Alias Record
+Alias records are used to map resource record sets in your hosted zone to Elastic load balancers,
+cloudfront or s3 bucket.
+Alias records work like a CNAME record in that you can map one DNS name(www.example.com) to another 'target' DNS name (elb1234.elb.amanzonaws.com)
+A CNAME cant be be used for naked domain names(zone apex record). You can;t have a CNAME for irctc.co.in, it must be either an A record or an Alias
+
+Simpler routing
+If you choose the simple routing policy you can only have one record woth multiple IP address.
+If you specify multiple values in a record, Route 53 returns all values to the user in a random order.
+
+Weighted Routing
+Allow you split your traffic based on different weights assigned.
+For example, you can set 10% of your traffic to go to us-east-1 and 90% to go to ap-south-10
+
+
+
+Health Checks
+You can set health checks on individual record sets
+If a record set fails a health check it will be removed from Route53 until it passess the health check
+You can set SNS notification(email) to alert you if a health check is failed.
+
+Latency-based Routing
+Allows you to route your traffic bases on the lowest network latency for your end user (ie which region will give them the fastest response time)
+To use latency-based routing, you create a latency resource record set for the Amazon EC2(or ELB) resource in each region that 
+hosts your website. When Amazon Route 53 receive a query for your site, it selects the latency resource record set
+for the region that gives the user the lowest latency. Route 53 then responds with the value associated with that resource record set.
+
+Failover Routing
+Failover routing policies are used when you went to create an active/passive set-up
+For example, you may want your primary site to be in EU-WEST-2 and your secondary DR Site in AP-SOUTHEAST-2
+Route53 will monitor the health of your primary site using a health check
+A health check monitors the health of your end points
+
+Geolocation Routing 
+Geolocation routing lets you choose where your traffic will be sent based on the geographic location of your users
+(i.e., the location from which DNS queries originate).
+For example, you might want all queries from Europe to be routed to a fleet of Ec2 instances that are specifically
+configured for your European customers. These servers may have the local language of your European customers and all prices are displayed in Euros.
+
+Geoproximity Routing(Traffic Flow only)
+Geoproximity routing lets Amazon Route 53 route traffic to your resources
+based on the geographic location of your users and your resources.
+You can also optionally choose to route more traffic or less to a given resource by specifying a value,
+known as a bias
+A bias expands or shrinks the size of geographic region from which traffic is routed to a resource
+To use geopromixity routing, you must use Route53 traffic flow.
+
+MultiValue Answer
+MultiValue Answer routing lets you configure Amazon Route53 to return multiple values,
+such as IP addresses for your web servers, in response to DNS queries.
+You can specify multiple values for almost any record, but multivalue answer routing also lets you check the health of each resource,
+so route 53 returns only values for healthy resource
+
+This is similar to simple routing however it allows you to put health check on each rec
