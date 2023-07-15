@@ -1,0 +1,120 @@
+AWS Certified Developer – Associate
+
+The main technologies covered in this course include:
+
+IAM
+EC2
+Cognito
+S3
+CloudFront
+Lambda
+API Gateway
+X-Ray
+DynamoDB
+KMS
+SQS
+SNS
+Kinesis
+Elastic Beanstalk
+CodeCommit
+CodeDeploy
+CodePipeline
+Course Content:-
+
+Learn how to develop, deploy, and debug Server-less applications using AWS and
+Guaranteed pass the AWS Certified Developer – Associate (Released June 2018) exam
+IAM
+o IAM
+o IAM Lab
+
+EC2
+o EC2 101
+o EC2 Lab
+o How To Use Putty (Windows Users Only)
+o Elastic Load Balancer
+o Route 53 Lab
+o CLI Demo Lab
+o EC2 with S3 Role Lab
+o How to Encrypt an EBS Volume Attached to EC2 Lab
+o RDS 101
+o RDS Lab
+o RDS Multi-AZ and Read Replicas
+o Elasticache 101
+o EC2 Summary
+
+S3
+o S3
+o S3 Security
+o S3 Policies
+o S3 Encryption
+o Set Up Encryption On an S3 Bucket
+o CORS Configuration Lab
+o CloudFront
+o CloudFront Lab
+o S3 Performance Optimization
+o S3 Performance Update
+o S3 Summary
+
+Serverless Computing
+o Serverless
+o Lambda
+o API Gateway
+o Build a Simple Serverless Website with Route 53, API Gateway, Lambda and S3
+o Version Control with Lambda
+o Using Polly to Help Your Exam Lab – Part 1 &amp; 2
+o Make an Alexa Skill Lab
+o Step Functions
+o X-Ray
+o Advanced API Gateway
+o Serverless Summary
+
+DynamoDB
+o Introduction to DynamoDB
+o Creating a DynamoDB Table Lab
+o Indexes Deepdive
+o Scan vs Query API Call
+o DynamoDB Provisioned Throughput
+o DynamoDB Accelerator (DAX)
+o ElastiCache
+
+KMS and Encryption on AWS
+o KMS
+o KMS API Calls
+o KMS Envelope Encryption
+o KMS Exam Tips
+
+Other AWS Services
+o SQS
+o Simple Notification Service
+o SES vs SNS
+o Kinesis
+o Kinesis Lab
+o ElasticBeanstalk
+o Deploying Apps With ElasticBeanstalk
+o Updating ElasticBeanstalk
+o Advanced ElasticBeanstalk
+o RDS &amp; ElasticBeanstalk
+o Other AWS Services Summary
+o Other AWS Services Quiz
+
+Developer Model
+o What is CI/CD?
+o CodeCommit
+o CodeCommit Lab
+o CodeDeploy
+o CodeDeploy Lab 1, 2 &amp; 3
+o CodePipeline
+o CodePipeline Lab
+o Advanced CodeDeploy the AppSpec File
+o Docker and CodeBuild Lab 1 &amp;2
+
+Advanced IAM
+o Web Identity Federation
+o Cognito User Pools
+o Inline Policies vs Managed Policies vs Custom Policies
+
+Monitoring
+o CloudWatch
+o CloudTrail
+X-Ray Configuration
+Docker & Elastic Beanstalk
