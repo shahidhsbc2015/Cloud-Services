@@ -1,0 +1,43 @@
+Continue from VPC NAT assignment
+1. Create NACL
+	name - MyNACL
+	VPC - MyVPC
+2. host web on public EC2.
+3. NACL
+	MyNACL>Subnet Associate>subnet - 10.0.1.0 - us-east-1a
+4. refersh webserver > it will time out
+	because we haven't allow/setup this NACL to allow HTTP traffic
+5. MyNACL>inbound rules>Edit>
+	Rule		Port		Source
+	100			80			0.0.0.0/0
+	200			443			0.0.0.0/0
+	300			22			0.0.0.0/0
+	
+	MyNACL>outbound rules>Edit
+	Rule		Port		Source
+	100			80			0.0.0.0/0
+	200			443			0.0.0.0/0
+	300			1024-65535	0.0.0.0/0 (Ephemeral port)
+	
+	
+	https://en.wikipedia.org/wiki/Ephemeral_port
+
+6. MyNACL>inbound rules>Edit>
+	Rule		Port		Source
+	100			80			0.0.0.0/0
+	200			443			0.0.0.0/0
+	300			22			0.0.0.0/0
+	400			80			MyIP		Deny
+	still traffic/Web will be accessible as 100 rule overwrite 400 rule.
+	Change to 
+	Rule		Port		Source
+	100			80			0.0.0.0/0
+	200			443			0.0.0.0/0
+	300			22			0.0.0.0/0
+	99			80			MyIP		Deny
+7.	MyNACL>inbound rules>Edit>
+	Rule		Port		Source
+	100			80			0.0.0.0/0
+	200			443			0.0.0.0/0
+	300			22			0.0.0.0/0
+	400			1024-65535	0.0.0.0/0 (Ephemeral port)

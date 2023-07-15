@@ -1,0 +1,86 @@
+					VPC Lab Instructions
+
+1. On the VPC dashboard, click on "Your VPCs", create VPC [myVPC, CIDR address (10.0.0.0/16)], and in 
+   VPC Actions, Edit DNS hostnames and check the enable Checkbox.
+
+2. Verify with the creation of this new VPC, a default SG, a default NACL and a Main Route Table are also created.
+
+3. Under Internet Gateway, create an Internet Gateway [myIGW], and in actions, attach this gateway to [myVPC].
+
+4. Under Route tables, create a custom route table [myRouteTable][myVPC] and in the routes tab, add a route, with 
+    destination - Internet (0.0.0.0/0) and select the Target - Internet Gateway - [myIGW]
+
+5. Under Subnets, create a Subnet [Public Subnet, [myVPC], CIDR address (10.0.1.0/24), AZ (us-west-2a)], and in 
+    Actions, enable the Auto Assign Public IP setting for this subnet.
+
+6. Under Subnets, create a second Subnet [Private Subnet, [myVPC], CIDR address (10.0.2.0/24), AZ]
+   (preferably in a different AZ (us-west-2b).)
+
+7. Under Route Tables, select the custom route table [myRouteTable][myVPC], and under the tab Subnet 
+   Associations, associate [Public Subnet] with this table.
+
+8. Under Route Tables, select the main route table [myVPC], and under the tab Subnet Associations, 
+   associate [Private Subnet] with this table.
+
+9. IN the EC2 Dashboard, create two Security Groups for [myVPC]: 
+   [WebSG - Add rules for (SSH-22,HTTP-80) and Source (0.0.0.0/0)
+   DBSG -Add rules for (SSH-22,Mysql/Aurora-3306,All ICMP-IPv4) and replace all Source ID's with the 
+   [Public Subnet]'s CIDR address (10.0.1.0/24)].
+
+10. On the EC2 dashboard, create EC2 instance[webServer] with network [myVPC], subnet [Public Subnet], 
+    security group [WebSG] and key-pair.
+
+11. On the EC2 dashboard, create EC2 instance[dbServer] with network [myVPC], subnet [Private Subnet], 
+    security group [DBSG]. Note that this instance does not have a public DNS and public IP.
+
+12. Connect (SSH) to the [webServer] and ping the [dbServer]. The [webServer] should be able to ping the
+    [dbServer]. This is due to the [ICMP] rule in the [DBSG].
+
+13. On the [webServer], copy and create the same key-pair used to connect to the [webServer] using a
+    editor like nano or vi. Use the command chmod 0600 <KeyPair.pem> to restrict access permissions.
+
+14. Connect to the [dbServer] from the [webServer] using ssh ec2-user@10.0.2.xxx -i <KeyPair.pem> 
+    and once connected, run the "yum update -y" command. 
+    An error should occur. This is because the [dbServer] has no access to the Internet.
+
+(To enable the [dbServer] to access the Internet, a NAT Instance or a NAT Gateway should be used.
+
+15. From the EC2 dashboard, select a NAT AMI from Community AMI's and create a NAT instance[natInstance]
+    with network [myVPC], subnet [Public Subnet], and security group [WebSG].
+
+16. In the Actions for the [natInstance], under Networking, disable the Source/Destination check setting.
+
+17. Modify the main route table of [myVPC]
+	Edit Routes> Add Route> 
+	Destination: 0.0.0.0/0
+	Target > Instance > NAT Instance
+
+18. Re-run the yum command on the [dbServer] and now the updates should happen.
+
+19. Terminate the [natInstance] from the EC2 dashboard.
+
+20. In the main route table of [myVPC], you will notice that the Target column of the [natInstance] now
+    has the value "Black Hole".
+
+21. Modify the main route table of [myVPC]
+	Edit Routes> Remove the entry that contains the Target as"Black Hole".
+
+22. Create NAT Gateway
+	> [Public Subnet]
+	> New EIP
+	> Edit main route table of [myVPC]
+        > Add Route>
+	Destination: 0.0.0.0/0
+        Target > NAT Gateway
+
+23. Test whether the [dbServer] can access the Internet, by running a command "yum install mysql -y".
+
+The VPC Lab is complete.
+	
+======================================================
+Removal of resources sequence:
+1. Delete the NAT Gateway
+2. Terminate both the EC2 instances from the EC2 dashboard.
+3. On the VPC dashboard, Delete [myVPC] (Be careful not to delete the default VPC).
+4. Finally, release the EIP address.
+======================================================

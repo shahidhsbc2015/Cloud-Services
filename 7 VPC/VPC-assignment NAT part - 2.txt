@@ -1,0 +1,29 @@
+Continue from VPC assignment
+NAT Instance
+1. launch ec2
+	AMI cummunity : amzn-ami-vpc-nat-hvm-<version>
+	VPC - MyVPC
+	subnet - 10.0.1.0 - us-east-1a
+	security group - MyWebSG
+2. Instance console/Nat instance ec2>Action>Networking>Change Source/Destination Check> disable
+
+3. VPC>Route table
+	main Route table>route>edit route
+	a>	Destination - 0.0.0.0/0
+		Target 		- nat_instance
+
+4. Login to private Ec2 via public Ec2
+5. yum update -y
+6. terminate Nat instance.
+7. yum install httpd--->time out
+8. go to main Route table>route
+	status against nat-instance ---> blackhole
+
+NAT Gateway
+1. NAT Gateway>Create:
+	a. subnet - 10.0.1.0 - us-east-1a (get subnet ID from subnet console)
+	b. Elastic IP - create new and attach
+2.	VPC>Route table
+	main Route table>route>edit route
+		Target 		- nat_gateway
+	a>	Destination - 0.0.0.0/0

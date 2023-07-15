@@ -1,0 +1,17 @@
+Continue from NACL assignment
+1. NACL - diassociate subnet
+	MyNACL>Subnet Associate>subnet - 10.0.1.0 - us-east-1a
+2. Delete MyNACL
+3. Stop/Delete NAT Gateway
+4. Delete Elastic IP addresses
+
+5.	VPC>Route table
+	main Route table>route>edit route 
+		delete NAT Gateway
+
+6. Create Endpoint
+	Service category - AWS services
+	Service Name - com.amazonaws.ap-south-1.s3
+	type - Gateway
+	Route Table ID - Main Route table
+

@@ -1,0 +1,70 @@
+1.Create New VPC
+	Name: MyVPC
+	CIDR - 10.0.0.0/16
+	IVP6 - enable
+	Note: New route table,Network ACL and security group will be created by default associated to new VPC
+2. Create 2 new Subnet
+	name - 10.0.1.0 - us-east-1a
+	VPC - MyVPC
+	AZ - us-east-1a
+	CIDR - 10.0.1.0/24
+	
+	name - 10.0.2.0 - us-east-1b
+	VPC - MyVPC
+	AZ - us-east-1b
+	CIDR - 10.0.2.0/24
+	
+	Note Available Ip - 251 not 256
+	check https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+3. Make 1 subnet Public.
+	select: 10.0.1.0 - us-east-1a subnet
+	Action>modify auto-assign-ip>enable-auto-assign-ip>save
+4. Create Internet gateway
+	name - MyInternetGateway
+	Select New InternetGateway>Actions>Attach to VPC>MyVPC
+5. Create New Route table.
+	name - MyPublicRoute
+	VPC - MyVPC
+	Routes>Edit route
+	a>	Destination - 0.0.0.0/0
+		Target 		- InternetGateway
+	b>	Destination - ::/0/0
+		Target		- InternetGateway
+	Subnet Associations
+	Select: 10.0.1.0 - us-east-1a subnet
+6. Create 2 EC2 in New VPC and different AZ.
+	a)	Public - Ec2 
+		VPC - MyVPC
+		subnet - 10.0.1.0 - us-east-1a
+		Public IP - Enable
+		Create new security group with 22 port and 80 port. Name - MyWebSG
+		Add this security group to public EC2
+	b)	Private - Ec2
+		VPC - MyVPC
+		subnet - 10.0.2.0 - us-east-1b
+		public IP - Disable
+		security group -default
+
+7. ssh to public Ec2
+
+Login to private Ec2
+
+8. Create new security group
+	name - MyDbSg
+	VPC - MyVPC
+	type		source
+	all ICMP	10.0.1.0/24
+	HTTP		10.0.1.0/24
+	HTPPS		10.0.1.0/24
+	SSH			10.0.1.0/24
+	MySQL		10.0.1.0/24
+	
+	Change private Ec2 security from default to MyDbSg
+	
+9. login/ssh to public Ec2
+	ping private IP of private EC2
+	create/copy pem key here(vi editor)
+	chmod 400 mykey.pem
+	ssh ec2-user@ip -i mykey.pem
+	
+	yum update -y
