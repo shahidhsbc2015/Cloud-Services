@@ -1,0 +1,56 @@
+1. Create S3 Bucket (private)			s3://myfirsts3bucketprivate
+	a. Upload couple of files - (default setting)
+	b. Create folder and upload files in it - (default setting)
+	c. Rename any one Object to make-it-public
+		i.  Try to access object url in browser (might get error)
+		ii. Make it public (might get error)
+	d. Rename any one Object to s3-tier-1,
+		i. Change its storage type to S3-One Zone IA
+	e. Rename any one Object to s3-tier-2,
+		i. Change its storage type to Deep Glacier
+		ii. Try to download this Object
+	f. Rename any one Object to encrypt-file,
+		i. Change its encrypt to SSE-S3
+	g. Upload new file with following property.
+		i. Storage type as S3-IA
+		ii. encrypt as SSE-S3
+2. Create S3 Bucket (Public)
+	a. Upload couple of files - (default setting)
+	b. Create folder and upload files in it - (default setting)
+	c. Rename any one Object to make-it-public,
+		i.  Try to access object url in browser (might get error)
+		ii. Make it public
+		iii. Now Try again to access object url in browser
+	d. Note Version Id of these objects
+
+3. Create S3 Bucket (Version,Public)
+	a. Create a txt file in local as test-version-in-s3. 
+		i. Write "Hello guys. Lets test version in s3. This is version-1.0". Save it.
+		ii. Upload this file to s3. Try to access object url in browser
+			"Hello guys. Lets test version in s3. This is version-1.0"
+		iii. Check the verison of this object.
+	b. Now append Local file with "This Update will have version-2.0". Save it.
+		i. Upload and overwrite this file to s3.
+		ii. Check the verison of this object. Try to access object url in browser
+			"Hello guys. Lets test version in s3. This is version-1.0
+			 This Update will have version-2.0"
+	c. Now append Local file with "This Update will have version-3.0". Save it.
+		i. Upload and overwrite this file to s3.
+		ii. Check the verison of this object. Try to access object url in browser
+			"Hello guys. Lets test version in s3. This is version-1.0
+			 This Update will have version-2.0
+			 This Update will have version-3.0"
+	d. Delete this object. Try to access object url in browser
+		i. Check the verison of this object. 
+		ii. Observe "delete mark"
+	e. To recover this file delete the "delete mark"
+	f. Try to access object url in browser
+			"Hello guys. Lets test version in s3. This is version-1.0
+			 This Update will have version-2.0
+			 This Update will have version-3.0"
+	g. Delete latest version. Try to access object url in browser
+		i. Content of object have 
+			"Hello guys. Lets test version in s3. This is version-1.0
+			 This Update will have version-2.0"
+		
+4. Try to Host static website on S3 bucket

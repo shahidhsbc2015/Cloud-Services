@@ -1,0 +1,66 @@
+===========
+Encryption:
+===========
+1. Create S3 Bucket (private)
+	a. Update bucket policy to prevent upload unencrypted files.
+	b. Update bucket policy to allow only SSE-KMS unencrypted files to upload.
+	c. Try to upload unencrypted file (should fail)
+	d. Try to upload SSE-S3(sse-aes56) encryped file. (should fail)
+	e. Try to upload SSE-KMS encryped file. (should upload)
+2. Create S3 Bucket (private)
+	a. Update bucket policy to prevent upload unencrypted files.
+	b. Update bucket policy to allow only SSE-S3(sse-aes56) unencrypted files to upload.
+	c. Try to upload unencrypted file (should fail)
+	d. Try to upload SSE-S3(sse-aes56) encryped file. (should upload)
+	e. Try to upload SSE-KMS encryped file. (should fail)
+
+====
+CORS:
+====
+
+1. Create S3 Bucket (public)
+	a. Enable host static website on s3 created bucket. 
+	b. Upload error.html,index.html and loadpage.html files with public access
+		Check index.html, it is loading 'loadpage.html' file
+	c. Try to access website using host url
+	content of index page as well as loadpage should display
+	d. Delete loadpage.html	
+		refresh url, content of loadpage.html now gone.
+2. Create another S3 Bucket (public)
+	a. Upload loadpage.html file with public access
+	b. Copy object url of loadpage.html
+	c. Replace/update content of index.html in local with loadpage.html public object url of new bucket
+	d. upload update index.html to previous bucket.
+	e. Refers/try website url again. Content of loadpage.html still not loaded. (can check error in broswer inspect section)
+	f. Update S3 bucket CORS property allowing website url to access bucket content.
+	Now refer website url again it should load other bucket loadpage.html file now.
+
+===========
+CloudFront:
+===========
+1. Create S3 Bucket (public) - far region like canada
+	a. Update Large image with public access enable.
+	b. Access file using public url and note time to load image in broswer.
+2. Create web CloudFront distribution as below config.
+	1. Origin Domain name:- select your s3 bucket
+	2. Restrict bucket access :- yes
+	3. Origin access identity: yes
+	4. Grant Read permission on Bucket:- yes
+	5. Viewer Protocol policy:- redirect HTTP to HTTPS
+	6. Wait to deploy. 
+	7. Disable public access of uploaded file in s3 bucket.
+	7b. Check S3 bucket policy. It is updated, granted cloudfront to access s3 bucket.
+	8. Copy image public url and update S3 bucket domain with CloudFront domain name:
+		example:-
+			S3 image public url :- <bucketname>.s3.<region>.amazonaws.com/image.jpg
+			cloudfront domain name :- abcdxyz.cloudfront.net
+			new file url :- abcdxyz.cloudfront.net/image.jpg
+			
+			https://mycloundfrontbucketpublic.s3.ca-central-1.amazonaws.com/IMG_20201130_172048.jpg
+			
+			https://dtno4h44u2ycv.cloudfront.net/IMG_20201130_172048.jpg
+			
+	9. Try to access new url from diifferent broswer. And observe loading time. (it should take less time)
+	10. Disable cloudfront distribution and delete it.
+
+

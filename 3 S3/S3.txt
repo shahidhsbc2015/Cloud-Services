@@ -1,0 +1,10 @@
+whats is s3
+Data Consistency
+S3 Storage Tiers
+Cross Region Replication
+S3 Transfer Acceleration
+Point to remember
+===================
+S3 Encryption
+=================
+CORS Configuration

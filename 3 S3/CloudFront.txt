@@ -1,0 +1,46 @@
+What is CDN?
+A CDN or a content delivery network is a system of distributed servers (network) that deliver web pages and other web content to users based on the geographical location of the user, the origin of the web page and a content delivery server.
+
+
+What is CloudFront
+Amazon CloudFront can be used to deliver your entire web site, including dynamic, static, streaming and interactive content using AWS global network of edge locations.
+Requests for your content are automatically routed to your nearest edge location and content is delivered to you with the best possible performance.
+
+Ex:- Can be used to be used to optimize performance for users accessing a website backed by S3.
+
+Amazon CloudFront is optimized to work with other Amazon Web Services, like S3,
+S3, Ec2 instance,an elastic load balance or route 53.
+Amazon CloudFront also works seamlessly with any non AWOS origins Server, which stores the original, definitive version of your files.
+
+
+Cloud front - key terminology.
+
+Edge Location - This is the location where content is cached you can case content that you're trying and can also be writte. Separate to an AWS region or availability zone.
+
+Origin - This is really just the origin of all the files that the content delivery network will distribute. Origin can be S3, Ec2 instance,an elastic load balance or route 53.
+
+Distribution- This is the name given to content distribution network, which consists of a collection of edge locations 
+1. Web distribution : - Used for Web sites (HTTP/HTTPs)
+2. RTMP (Realtime messaging protocol ): Used for streaming audio video, data over the Internet or FLash multimedia content. (Adobe Real Time Messaging Protocol)
+
+CloudFront and S3 Transfer Acceleration:
+Amazon S3 Transfer Acceleration enables fast, easy and secure transfers of your files over long distances between your end users and an S3 bucket.
+Transfer Acceleration takes advantage of cloud front's globally distributed edge location. As the data arrives at an edge location, data is routed to S3 over an optimized network.
+
+Exam Tips:
+
+Edge Location - This is the location where content is cached you can case content that you're trying and can also be writte. Separate to an AWS region or availability zone.
+
+Origin - This is really just the origin of all the files that the content delivery network will distribute. Origin can be S3, Ec2 instance,an elastic load balance or route 53.
+
+Distribution- This is the name given to content distribution network, which consists of a collection of edge locations 
+1. Web distribution : - Used for Web sites (HTTP/HTTPs)
+2. RTMP (Realtime messaging protocol ): Used for streaming audio video, data over the Internet or FLash multimedia content. (Adobe Real Time Messaging Protocol)
+
+Edge locations are not just read only - you can WRITE them too. (i.e. PUT an object on to them)
+
+CloudFront edge Location are utilsed by S3 transfer acceleration to reduce latency for S3 uploads. 
+
+Objects are cached for the life of the TTL (Time to Live)
+
+You can clear cached objects, but you will be charged.
