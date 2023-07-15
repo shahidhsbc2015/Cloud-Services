@@ -1,0 +1,18 @@
+aws <service name> <command>
+
+aws configure
+
+aws iam list-users
+aws s3 ls
+
+
+cd ~
+cd .aws
+ls
+
+cd ~
+rm -rf .aws
+
+IAM role---IAM user
+
+machine /people

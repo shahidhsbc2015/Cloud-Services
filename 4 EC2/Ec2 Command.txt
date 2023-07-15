@@ -1,0 +1,25 @@
+sudo yum clean all
+sudo yum -y update
+sudo yum -y install httpd
+
+--------create file under below path---------
+cd /var/www/html
+ls
+sudo nano index.html
+
+<html><body><h1>Welcome to Ec2 Webhost</h1></body></html>
+
+
+ls
+
+
+sudo systemctl start httpd
+sudo systemctl enable httpd-----------Be sure that Apache starts at boot
+sudo systemctl status httpd
+
+
+--------------------------------------------------------------
+
+service httpd start
+chkconfig on
+service httpd status

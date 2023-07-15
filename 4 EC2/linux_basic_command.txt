@@ -1,0 +1,27 @@
+list dir/file:
+
+ls
+ls -lrth
+ll
+
+navigate:
+cd <folder_name>
+cd ..
+current path:
+pwd
+
+read file:
+cat <filename>
+
+create a file:
+vi
+nano
+vim
+touch
+
+Vi----
+	insert mode- type i
+	exit insert mode--Esc key
+	exit mode(shift+:)--
+				q!---exit and no save
+				wq! - save and exit

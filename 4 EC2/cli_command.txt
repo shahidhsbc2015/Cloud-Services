@@ -1,0 +1,9 @@
+aws s3 cp <file_name> <s3_bucket_name+path>
+
+aws s3 cp linux_basic_command.txt s3://parag-demo-class-bucket/
+
+aws s3 cp s3://parag-demo-class-bucket/linux_basic_command.txt .
+
+
+
+aws s3 cp linux_basic_command.txt s3://parag-demo-class-bucket/folder_1/folder_2

@@ -1,0 +1,68 @@
+Select any desire region - us-east-1(N. Virginia)
+1. Launch EC2 Instance
+	a. Select - "Amazon Linux 2 AMI (HVM), SSD Volume Type" as AMI.
+	b. Choose an Instance Type as t2.micro
+	c. Configure Instance Details keep it default
+	d. Add Storage - default
+	e. Add Tags - add tags 
+		Name : Demo Ec2 Instance
+	f. Configure Security Group : 
+		a. Create a new security group
+		b. add ssh(22),http(80) ports
+	g. Create new key pair
+	Connect Ec2 Using putty 
+2. Host website in Ec2.
+	a. execute following command to host website in ec2.
+
+	--------update os and install apache---------
+	sudo yum clean all
+	sudo yum -y update
+	sudo yum -y install httpd
+	
+	--------create file under below path---------
+	cd /var/www/html
+	ls
+	echo "<html><body><h1>Welcome to Ec2 Webhost</h1></body></html>" > index.html
+	
+	--------start apache---------
+	service httpd start
+	chkconfig on
+	service httpd status
+
+	b. copy Ec2 public Ip and paste in browse 
+		http://<Ec2 public ip>
+	
+******Delete/terminate EC2******
+3. Launch EC2 Instance
+	a. Select - "Microsoft Windows Server 2019 Base" as AMI.
+	b. Choose an Instance Type as t2.micro
+	c. Configure Instance Details keep it default
+	d. Add Storage - default
+	e. Add Tags - add tags 
+		Name : Demo Ec2 Instance
+	f. Configure Security Group : 
+		a. Create a new security group
+		b. add RDP(3389) port
+	g. Create new key pair/Existing Key
+	Connect Ec2 Using RDP client
+******Delete/terminate EC2******
+4. Launch EC2 Instance
+	a. Select - "Amazon Linux 2 AMI (HVM), SSD Volume Type" as AMI.
+	b. Choose an Instance Type as t2.micro
+	c. Configure Instance Details keep it default
+	d. Add Storage - 
+		i. Enable Encryption on root volume 
+		ii. Add EBS Volume :Volume Type - Cold HDD, Size - 125
+		iii. Add EBS Volume :Volume Type - throughput optimized HDD IOPs, Size - 125
+		iv. Add EBS Volume :Volume Type - Magnetic, Size - 8
+		
+	e. Add Tags - add tags 
+		Name : Demo Ec2 Instance
+	f. Configure Security Group : 
+		a. Create a new/Use Existing security group
+		b. add ssh(22),http(80) ports
+	g. Create new/Use Existing key pair
+	f. Go to Volume Section.
+		i. Change Volume type of gp2(root) to Provisioned IOPs, Size-25GB and iops as 200
+		ii. Change size of Volume  of st1  Size-130GB 
+******Delete/terminate EC2****** 

@@ -1,0 +1,71 @@
+Select any desire region - us-east-1(N. Virginia)
+1. Launch EC2 Instance
+	a. Select - "Amazon Linux 2 AMI (HVM), SSD Volume Type" as AMI.
+	b. Choose an Instance Type as t2.micro
+	c. Configure Instance Details keep it default
+	d. Add Storage - default
+	e. Add Tags - add tags 
+		Name : Demo Ec2 Instance
+	f. Configure Security Group : 
+		a. Create a new/Use Existing security group
+		b. add ssh(22),http(80) port
+	g. Create new/Use Existing key pair
+	Connect Ec2 Using putty 
+	
+	Host website in Ec2.
+	h. execute following command to host website in ec2.
+
+	--------update os and install apache---------
+	sudo yum clean all
+	sudo yum -y update
+	sudo yum -y install httpd
+	
+	--------create file under below path---------
+	cd /var/www/html
+	ls
+	echo "<html><body><h1>Welcome to Website hosted from Ec2</h1></body></html>" > index.html
+	
+	--------start apache---------
+	service httpd start
+	chkconfig on
+	service httpd status
+
+	i. copy Ec2 public Ip and paste in browse 
+		http://<Ec2 public ip>
+	
+	j. Go to Volume Section.
+		i. select root volume
+		ii. Action>Create Snapshot
+
+	k. Go to Snapshot Section.
+		i. select your snapshot
+		ii. Action>Create image
+		iii. name:-"demo_image" ( you could modify root volume Snapshot property here, Also you could enable Encryption here)
+		iv. Create
+	l. Launch new instance
+		i. under my AMI Select your AMI- "demo_image"
+		ii. Choose an Instance Type as t2.micro
+		iii. Configure Instance Details keep it default
+		iv. Add Storage - default
+		v. Add Tags - add tags 
+			Name : Demo Ec2 Instance
+		vi. Configure Security Group : 
+			a. Create a new/Use Existing security group
+			b. add ssh(22),http(80) port
+		vii. Create new/Use Existing key pair
+		viii. copy New Ec2 public Ip and paste in browse 
+				http://<Ec2 public ip>
+	m. Go to AMI Section
+		i. select your image/AMI
+		ii. Action>copy AMI
+		iii. Destination region: mumbai
+Select any desire region - ap-south-1(mumbai)
+	n. Launch new instance in mumbai region using your new AMI
+		copy New Ec2 public Ip and paste in browse 
+				http://<Ec2 public ip>
+
+******Delete/terminate both regions******
+Terminate all EC2 both regions
+deregister all AMI under AMI Section
+delete snapshot under snapshot Section
+delete EBS volume if any
