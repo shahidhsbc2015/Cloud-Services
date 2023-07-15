@@ -1,0 +1,23 @@
+Amazon EMR is the industry - leading cloud big data platform for processing vast amounts of data usnig open-source tools such
+Apache Spark, Apache Hive, Apache HBase, Apache Flink, Apache Hudi, etc
+With EMR, You can run petabyte-scale analysis at less than half the cost of traditional on-premises solutions
+and over three times faster than standard Apache Spark.
+
+The Cental component of Amazon EMR is the cluster. A Cluster is a collection of Amazon Elastic Compute Cloud (Amazon Ec2) instance.
+Each instance in the cluster is called a node. Each node has a role within the cluster, referred to as the node type.
+Amazon EMR also installs different software components on each node type, giving each node a role in a distributed applciation like Apache Hadoop.
+
+Master Node:
+	A node that manages the cluster. The master node tracks the status of tasks and monitors the health of the cluster.
+	Every cluster has a master node.
+Core node:
+	A node with software components that runs tasks ans stores data in hadoop Distributed File System (HDFS) on your cluster.
+	Multi-node cluster have atleast one core node
+Task node:
+	A node with software components that only runs tasks and does not store data in HDFS.
+	Task nodes are optional
+	
+You can configure a cluster to periodically archive the log files stored on the master node to Amazon S3.
+this ensures the logs files are available after the cluster terminates, whether this is through normal shutdown or due to error.
+Amazon EMR archives the logs files to Amazon S3 at five-minute intervals
+	

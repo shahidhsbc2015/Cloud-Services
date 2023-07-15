@@ -1,0 +1,51 @@
+[
+  {
+    "Sr. No.": 1,
+    "First name": "parag",
+    "Surname": "jain",
+    "gender": "m"
+  },
+  {
+    "Sr. No.": 2,
+    "First name": "aditi",
+	"Surname": "jain",
+    "gender": "f"
+  },
+  {
+    "Sr. No.": 3,
+    "First name": "pooja",
+    "Surname": "gupta",
+    "gender": "f",
+  },
+  {
+    "Sr. No.": 4,
+    "First name": "ram",
+    "Surname": "sharma",
+    "gender": "m"
+  },
+  
+  {
+  "Sr. No.":10,
+  "First name":"john",
+  "gender": "M",
+  },
+  {
+    "Sr. No.":11,
+  "First name":"sonlo",
+  "gender": "M",
+  "gst":"fajbvkvs"
+	},
+  {
+    "Sr. No.":12,
+  "First name":"modi",
+  "gst":"3392309"
+	}	
+	,{
+	"Sr. No.":13,
+	"date":"12/03/2021"
+	}
+	,	{
+	"Sr. No.":14`
+	}
+	
+]
