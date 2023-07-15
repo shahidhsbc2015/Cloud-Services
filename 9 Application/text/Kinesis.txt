@@ -1,0 +1,25 @@
+What is streaming data ?
+Streaming data is data that is generated continuously by thousands of data sources which typically send in the data records simultaneously and in small sizes (order of kilobytes)
+	Purchases from an online store such as Amazon.com.
+	Stock prices.
+	Gaming data.
+	Social network data 
+	Geospatial data (like Uber)
+	iOT sensor data
+
+What is Kinesis
+Kinesis is a platform on AWS to send your streaming data to.
+Kinesis makes it easy to load and analyze streaming data and also providing the ability for you to build your own custom applications for your business needs.
+
+Different types of Kinesis
+
+Kinesis Streams
+Kinesis Firehose 
+Kinesis Analytics 
+
+Kinesis streams consists of shards:
+5 transactions per seconds for reads, up to a maximum total data read rate of 2 MB per second and up to 1,000 records per second for writes, up to a maximum total data write rate of 1 MB per second.(including partition keys)
+
+The data capacity of your stream is a function of the number of shards that you specify for a stream. The total capacity of the stream is the sum of the capacities of shards.
+
+Kinesis Firehose - S3
